@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pavement Print House | Vintage Custom Sports Apparel</title>
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-bg: #181818;
+            --accent-color: #e5a93b;
+            --text-color: #f3f3f3;
+            --text-muted: #a0a0a0;
+            --border-color: #2e2e2e;
+            --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(15, 15, 15, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            height: 90px; /* Increased logo size */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--accent-color);
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Banner */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Product Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 0.5rem auto 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            background-color: #222;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .size-selector {
+            margin-bottom: 1.2rem;
+        }
+
+        .size-selector label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .size-btn {
+            flex: 1;
+            padding: 0.4rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .size-btn:hover, .size-btn.active {
+            background-color: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--text-color);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: auto;
+            transition: background-color 0.2s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Custom Design Section */
+        .custom-upload-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .upload-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .form-group input[type="file"] {
+            display: none;
+        }
+
+        .file-dropzone {
+            border: 2px dashed var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            background-color: var(--bg-color);
+        }
+
+        .file-dropzone:hover {
+            border-color: var(--accent-color);
+        }
+
+        .submit-design-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        /* Cart Drawer */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: #141414;
+            border-left: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin: 1.5rem 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="Logo.jpg" alt="Pavement Print House Logo" id="brand-logo">
+            <span class="brand-title">Pavement Print House</span>
+        </div>
+        <button class="cart-btn" onclick="toggleCart()" aria-label="View Cart">
+            🛒 <span class="cart-count" id="cart-count">0</span>
+        </button>
+    </header>
+
+    <section class="hero">
+        <h1>Vintage Sports Gear</h1>
+        <p>Premium handcrafted retro-athletic graphic tees built for game day.</p>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">Featured Collection</h2>
+        <div class="product-grid">
+
+            <!-- Product 1 -->
+            <div class="product-card" data-id="1" data-name="Atlanta Braves Chop On Tee">
+                <img src="Braves.jpg" alt="Atlanta Braves Chop On Vintage Tee" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Atlanta Braves "Chop On!" Vintage Tee</h3>
+                    <div class="product-price">$25.00</div>
+                    <div class="size-selector">
+                        <label>Select Size:</label>
+                        <div class="size-options">
+                            <button class="size-btn active" onclick="selectSize(this)">S</button>
+                            <button class="size-btn" onclick="selectSize(this)">M</button>
+                            <button class="size-btn" onclick="selectSize(this)">L</button>
+                            <button class="size-btn" onclick="selectSize(this)">XL</button>
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart(this)">Add To Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-id="2" data-name="Music City Wolf Crest Tee">
+                <img src="NSC.jpg" alt="Music City Wolf Crest Vintage Tee" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Music City Wolf Crest Vintage Tee</h3>
+                    <div class="product-price">$25.00</div>
+                    <div class="size-selector">
+                        <label>Select Size:</label>
+                        <div class="size-options">
+                            <button class="size-btn active" onclick="selectSize(this)">S</button>
+                            <button class="size-btn" onclick="selectSize(this)">M</button>
+                            <button class="size-btn" onclick="selectSize(this)">L</button>
+                            <button class="size-btn" onclick="selectSize(this)">XL</button>
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart(this)">Add To Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-id="3" data-name="Celtics Parquet Legends Tee">
+                <img src="Celtics.jpg" alt="Celtics Legends of the Parquet Tee" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Celtics "Parquet Legends" Vintage Tee</h3>
+                    <div class="product-price">$25.00</div>
+                    <div class="size-selector">
+                        <label>Select Size:</label>
+                        <div class="size-options">
+                            <button class="size-btn active" onclick="selectSize(this)">S</button>
+                            <button class="size-btn" onclick="selectSize(this)">M</button>
+                            <button class="size-btn" onclick="selectSize(this)">L</button>
+                            <button class="size-btn" onclick="selectSize(this)">XL</button>
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart(this)">Add To Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" data-id="4" data-name="Custom Design Your Own Tee">
+                <!-- Updated with a professional t-shirt mockup photo -->
+                <img src="https://images.unsplash.com/photo-1618354691229-88d47f285158?auto=format&fit=crop&w=800&q=80" alt="Design Your Own T-Shirt" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Design Your Own Custom Sports Tee</h3>
+                    <div class="product-price">$25.00</div>
+                    <div class="size-selector">
+                        <label>Select Size:</label>
+                        <div class="size-options">
+                            <button class="size-btn active" onclick="selectSize(this)">S</button>
+                            <button class="size-btn" onclick="selectSize(this)">M</button>
+                            <button class="size-btn" onclick="selectSize(this)">L</button>
+                            <button class="size-btn" onclick="selectSize(this)">XL</button>
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart(this)">Add To Cart</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Custom Upload Section -->
+        <section class="custom-upload-section" id="upload-section">
+            <h2 class="section-title">Send Us Your Custom Concept</h2>
+            <div class="upload-container">
+                <form id="artist-email-form" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="user-name">Your Name</label>
+                        <input type="text" id="user-name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email">Your Email Address</label>
+                        <input type="email" id="user-email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="design-notes">Design Notes & Instructions</label>
+                        <textarea id="design-notes" rows="4" placeholder="Describe placement, vintage distressing level, team colors, or specific text..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Artwork / Rough Mockup</label>
+                        <div class="file-dropzone" onclick="document.getElementById('file-input').click()">
+                            <p id="file-label">📁 Click or drag file here to upload (PNG, JPG, SVG)</p>
+                            <input type="file" id="file-input" accept="image/*" onchange="updateFileName(this)">
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-design-btn">Email Design To Artists</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Shopping Cart Overlay & Drawer -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart Items populated via JS -->
+        </div>
+        <div class="cart-footer">
+            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem;">
+                <span>Total:</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="alert('Proceeding to checkout!')">Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Pavement Print House. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function selectSize(button) {
+            const container = button.parentElement;
+            container.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
+
+        function addToCart(button) {
+            const card = button.closest('.product-card');
+            const id = card.dataset.id;
+            const name = card.dataset.name;
+            const size = card.querySelector('.size-btn.active').innerText;
+            const price = 25.00;
+
+            cart.push({ id, name, size, price });
+            updateCartUI();
+            toggleCart();
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+
+            cartCount.innerText = cart.length;
+            cartItems.innerHTML = '';
+
+            let total = 0;
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">Your cart is empty.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <div>
+                            <strong>${item.name}</strong>
+                            <div style="font-size:0.85rem; color: var(--text-muted);">Size: ${item.size} | $${item.price.toFixed(2)}</div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" style="background:none; border:none; color: #ff5555; cursor:pointer;">✕</button>
+                    `;
+                    cartItems.appendChild(itemElement);
+                });
+            }
+
+            cartTotal.innerText = `$${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-drawer').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function updateFileName(input) {
+            const fileLabel = document.getElementById('file-label');
+            if (input.files.length > 0) {
+                fileLabel.innerText = `Selected File: ${input.files[0].name}`;
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('user-name').value;
+            alert(`Thank you ${name}! Your design file and request have been submitted directly to the Pavement Print House artists.`);
+            document.getElementById('artist-email-form').reset();
+            document.getElementById('file-label').innerText = '📁 Click or drag file here to upload (PNG, JPG, SVG)';
+        }
+    </script>
+</body>
+</html>
